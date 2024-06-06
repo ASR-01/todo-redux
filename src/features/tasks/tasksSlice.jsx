@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 /**
  * Loads the persisted tasks state from local storage.
  *
@@ -20,6 +19,7 @@ const loadState = () => {
  *
  * Array state - The array of tasks to be saved.
  */
+
 const saveState = (state) => {
   try {
     const serializedState = JSON.stringify(state);
@@ -29,13 +29,9 @@ const saveState = (state) => {
   }
 };
 
-// Define the initial state using the persisted tasks state
-const initialState = loadState();
-
-// Create a slice for tasks with add, delete, edit, and toggle actions
 export const tasksSlice = createSlice({
   name: "tasks",
-  initialState,
+  initialState: loadState(),
   reducers: {
     /**
      * Adds a new task to the state.
@@ -44,11 +40,13 @@ export const tasksSlice = createSlice({
      * action - The action containing the new task to add.
      *  The new state with the added task.
      */
+
     addTask: (state, action) => {
       const newState = [...state, action.payload];
       saveState(newState);
       return newState;
     },
+
     /**
      * Deletes a task from the state.
      *
@@ -61,12 +59,14 @@ export const tasksSlice = createSlice({
       saveState(newState);
       return newState;
     },
+
     /**
      * Edits an existing task's text.
      *
      * state - The current state of tasks.
      * action - The action containing the id and new text of the task to edit.
      */
+
     editTask: (state, action) => {
       const { id, text } = action.payload;
       const existingTask = state.find((task) => task.id === id);
@@ -75,12 +75,14 @@ export const tasksSlice = createSlice({
       }
       saveState(state);
     },
+
     /**
      * Toggles the completed status of a task.
      *
      * state - The current state of tasks.
      *  action - The action containing the id of the task to toggle.
      */
+
     toggleTask: (state, action) => {
       const existingTask = state.find((task) => task.id === action.payload);
       if (existingTask) {
@@ -91,8 +93,6 @@ export const tasksSlice = createSlice({
   },
 });
 
-// Export the action creators for use in components
 export const { addTask, deleteTask, editTask, toggleTask } = tasksSlice.actions;
 
-// Export the reducer to be used in the store configuration
 export default tasksSlice.reducer;

@@ -7,10 +7,10 @@ const TaskInput = () => {
   const [task, setTask] = useState("");
   const dispatch = useDispatch();
 
-  // Function to handle adding a task
+   // Function to handle adding a task
   const handleAddTask = () => {
     if (task.trim()) {
-      // Dispatch action to add task to Redux store
+        // Dispatch action to add task to Redux store
       dispatch(addTask({ id: uuidv4(), text: task, completed: false }));
       setTask("");
       // Reset the input box height after adding a task
@@ -20,12 +20,11 @@ const TaskInput = () => {
       }
     }
   };
-
   // Function to handle input change and auto-adjust textarea height
   const handleInputChange = (e) => {
     setTask(e.target.value);
-    e.target.style.height = "auto"; // Reset the height to auto
-    e.target.style.height = `${e.target.scrollHeight}px`; // Set the height to the scroll height
+    e.target.style.height = "auto";
+    e.target.style.height = `${e.target.scrollHeight}px`; //
   };
 
   return (
