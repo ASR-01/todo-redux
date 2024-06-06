@@ -22,11 +22,11 @@ Make sure you have the following installed on your system:
 
 1. Clone the repository:
      - Paste command in the terminal
-   git clone https://github.com/ASR-01/todo-redux.git
-   cd todo-redux
+    - git clone https://github.com/ASR-01/todo-redux.git
+   - cd todo-redux
 
 2. npm install
    - For Installing the dependencies
-   
+
 3. npm run dev
    - For starting the project
