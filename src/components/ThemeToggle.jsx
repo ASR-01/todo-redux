@@ -1,9 +1,10 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 
 const ThemeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  // Check the current theme from localStorage or system preference on mount
   useEffect(() => {
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -14,6 +15,7 @@ const ThemeToggle = () => {
     }
   }, []);
 
+  // Toggle the theme and update localStorage
   const toggleTheme = () => {
     if (isDarkMode) {
       document.documentElement.classList.remove('dark');

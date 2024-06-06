@@ -1,28 +1,31 @@
-import  { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addTask } from '../features/tasks/tasksSlice';
-import { v4 as uuidv4 } from 'uuid';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTask } from "../features/tasks/tasksSlice";
+import { v4 as uuidv4 } from "uuid";
 
 const TaskInput = () => {
-  const [task, setTask] = useState('');
+  const [task, setTask] = useState("");
   const dispatch = useDispatch();
 
+  // Function to handle adding a task
   const handleAddTask = () => {
     if (task.trim()) {
+      // Dispatch action to add task to Redux store
       dispatch(addTask({ id: uuidv4(), text: task, completed: false }));
-      setTask('');
+      setTask("");
       // Reset the input box height after adding a task
-      const textarea = document.getElementById('taskInput');
+      const textarea = document.getElementById("taskInput");
       if (textarea) {
-        textarea.style.height = 'auto';
+        textarea.style.height = "auto";
       }
     }
   };
 
+  // Function to handle input change and auto-adjust textarea height
   const handleInputChange = (e) => {
     setTask(e.target.value);
-    e.target.style.height = 'auto'; 
-    e.target.style.height = `${e.target.scrollHeight}px`; // 
+    e.target.style.height = "auto"; // Reset the height to auto
+    e.target.style.height = `${e.target.scrollHeight}px`; // Set the height to the scroll height
   };
 
   return (
@@ -33,8 +36,8 @@ const TaskInput = () => {
         onChange={handleInputChange}
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:text-white resize-none overflow-hidden"
         placeholder="Add a new task"
-        rows="1" 
-        style={{ maxWidth: 'calc(100% - 90px)' }} 
+        rows="1"
+        style={{ maxWidth: "calc(100% - 90px)" }}
       />
       <button
         onClick={handleAddTask}
